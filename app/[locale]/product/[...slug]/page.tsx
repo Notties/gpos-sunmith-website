@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 export default async function ProductDetails({
   params,
 }: {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 }) {
   const slug = (await params).slug;
 

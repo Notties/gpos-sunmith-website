@@ -7,8 +7,6 @@ import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import Navbar from "@/components/NavBar";
 
-
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -28,11 +26,9 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
   params,
-
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: Locale };
-
+  params: Promise<{ locale: Locale }>;
 }>) {
   const { locale } = await params;
   if (!routing.locales.includes(locale as Locale)) {
@@ -45,8 +41,8 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-        <Navbar />
-        {children}
+          <Navbar />
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>
